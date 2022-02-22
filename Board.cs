@@ -21,6 +21,16 @@ namespace Chess
 
 	public struct Move
 	{
+		public static Move BlackCastleShort = new Move("e8g8");
+		public static Move BlackCastleLong = new Move("e8c8");
+		public static Move WhiteCastleShort = new Move("e1g1");
+		public static Move WhiteCastleLong = new Move("e1c1");
+
+		public static Move BlackRookShortCastle = new Move("h8f8");
+		public static Move BlackRookLongCastle = new Move("a8d8");
+		public static Move WhiteRookShortCastle = new Move("h1f1");
+		public static Move WhiteRookLongCastle = new Move("a1d1");
+
 		public byte SrcIdx;
 		public byte DestIdx;
 		public Piece Promotion;
@@ -40,7 +50,7 @@ namespace Chess
 			this.SrcIdx = Notation.ToSquareIndex(fromSquare);
 			this.DestIdx = Notation.ToSquareIndex(toSquare);
 
-			// e7e8q
+			// e.g. e7e8q
 			Promotion = (uciMoveNotation.Length == 5) ? Notation.AsciiToPiece(uciMoveNotation[4]) : Piece.None;
 		}
 	}
@@ -71,6 +81,41 @@ namespace Chess
 
 			_state[move.DestIdx] = movingPiece;
 			_state[move.SrcIdx] = Piece.None;
+
+			if (CheckCastle(movingPiece, move, out Move rookMove))
+			{
+				Play(rookMove);
+			}
+		}
+
+		public bool CheckCastle(Piece movingPiece, Move move, out Move rookMove)
+		{
+			if (movingPiece == Piece.BlackKing && move.Equals(Move.BlackCastleShort))
+			{
+				rookMove = Move.BlackRookShortCastle;
+				return true;
+			}
+
+			if (movingPiece == Piece.BlackKing && move.Equals(Move.BlackCastleLong))
+			{
+				rookMove = Move.BlackRookLongCastle;
+				return true;
+			}
+
+			if (movingPiece == Piece.WhiteKing && move.Equals(Move.WhiteCastleShort))
+			{
+				rookMove = Move.WhiteRookShortCastle;
+				return true;
+			}
+
+			if (movingPiece == Piece.WhiteKing && move.Equals(Move.WhiteCastleLong))
+			{
+				rookMove = Move.WhiteRookLongCastle;
+				return true;
+			}
+
+			rookMove = default;
+			return false;
 		}
 	}
 }

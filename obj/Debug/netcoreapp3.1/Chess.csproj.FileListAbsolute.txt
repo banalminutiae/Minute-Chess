@@ -10,3 +10,4 @@ C:\Users\Andre\Documents\Chess\obj\Debug\netcoreapp3.1\Chess.csproj.CoreCompileI
 C:\Users\Andre\Documents\Chess\obj\Debug\netcoreapp3.1\Chess.dll
 C:\Users\Andre\Documents\Chess\obj\Debug\netcoreapp3.1\Chess.pdb
 C:\Users\Andre\Documents\Chess\obj\Debug\netcoreapp3.1\Chess.genruntimeconfig.cache
+C:\Users\Andre\Documents\Chess\obj\Debug\netcoreapp3.1\Chess.csprojAssemblyReference.cache

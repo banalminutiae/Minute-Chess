@@ -73,7 +73,8 @@ namespace Chess
 		// notation denoting initial state of game board
 		public const string STARTING_POS_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-		Piece[] _state = new Piece[64];
+		// board representation is more efficient as a flat array but requires juggling between rank/file and int index representation
+		Piece[] _state = new Piece[64]; 
 
 		bool _blacksMove = false;
 
@@ -193,35 +194,30 @@ namespace Chess
 					AddBlackPawnAttack(moves, squareIndex);
 					break;
 				}
-				/*
 				case Piece.BlackKnight:
 				{
-					AddBlackKnightMove(moves, squareIndex);
-					AddBlackKnightAttack(moves, squareIndex);
+                  AddKnightMove(moves, squareIndex)
 					break;
 				}
+				/*
 				case Piece.BlackBishop:
 				{
-					AddBlackBishopMove(moves, squareIndex);
-					AddBlackBishopAttack(moves, squareIndex);
+					AddBishopMove(moves, squareIndex);
 					break;
 				}
 				case Piece.BlackRook:
 				{
-					AddBlackRookMove(moves, squareIndex);
-					AddBlackRookAttack(moves, squareIndex);
+					AddRookMove(moves, squareIndex);
 					break;
 				}
 				case Piece.BlackQueen:
 				{
-					AddBlackQueenMove(moves, squareIndex);
-					AddBlackQueenAttack(moves, squareIndex);
+					AddQueenMove(moves, squareIndex);
 					break;
 				}
 				case Piece.BlackKing:
 				{
-					AddBlackKingMove(moves, squareIndex);
-					AddBlackKingAttack(moves, squareIndex);
+					AddKingMove(moves, squareIndex);
 					break;
 				}
 				*/
@@ -231,35 +227,31 @@ namespace Chess
 					AddWhitePawnAttack(moves, squareIndex);
 					break;
 				}
-				/*
+				
 				case Piece.WhiteKnight:
 				{
-					AddWhiteKnightMove(moves, squareIndex);
-					AddWhiteKnightAttack(moves, squareIndex);
+					AddKnightMove(moves, squareIndex);
 					break;
 				}
+				/*
 				case Piece.WhiteBishop:
 				{
-					AddWhiteBishopMove(moves, squareIndex);
-					AddWhiteBishopAttack(moves, squareIndex);
+					AddBishopMove(moves, squareIndex);
 					break;
 				}
 				case Piece.WhiteRook:
 				{
-					AddWhiteRookMove(moves, squareIndex);
-					AddWhiteRookAttack(moves, squareIndex);
+					AddRookMove(moves, squareIndex);
 					break;
 				}
 				case Piece.WhiteQueen:
 				{
-					AddWhiteQueenMove(moves, squareIndex);
-					AddWhiteQueenAttack(moves, squareIndex);
+					AddQueenMove(moves, squareIndex);
 					break;
 				}
 				case Piece.WhiteKing:
 				{
-					AddWhiteKingMove(moves, squareIndex);
-					AddWhiteKingAttack(moves, squareIndex);
+					AddKingMove(moves, squareIndex);
 					break;
 				}
 				*/
@@ -276,8 +268,8 @@ namespace Chess
 
 		private void AddBlackPawnAttack(List<Move> moves, int startPosition)
 		{
-			int rank = startPosition / 8;
-			int file = startPosition % 8;
+			int rank = startPosition % 8;
+			int file = startPosition / 8;
 
 			if (rank - 1 >= 0 && file - 1 <= 7) // black pawns attack 'down' left 
 			{
@@ -295,52 +287,24 @@ namespace Chess
 			}
 		}
 
-		private void AddBlackKnightMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddBlackKnightAttack(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddBlackBishopMove(List<Move> moves, int startPosition)
+		private void AddKnightMove(List<Move> moves, int startPosition)
 		{
 			
 		}
 
-		private void AddBlackBishopAttack(List<Move> moves, int startPosition)
+		private void AddBishopMove(List<Move> moves, int startPosition)
+		{
+			
+		}
+
+
+
+		private void AddRookMove(List<Move> moves, int startPosition)
 		{
 
 		}
 
-		private void AddBlackRookMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddBlackRookAttack(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddBlackQueenMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddBlackQueenAttack(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddBlackKingMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddBlackKingAttack(List<Move> moves, int startPosition)
+		private void AddQueenMove(List<Move> moves, int startPosition)
 		{
 
 		}
@@ -356,8 +320,8 @@ namespace Chess
 
 		private void AddWhitePawnAttack(List<Move> moves, int startPosition)
 		{
-			int rank = startPosition / 8;
-			int file = startPosition % 8;
+			int rank = startPosition % 8;
+			int file = startPosition / 8;
 
 			if (rank - 1 >= 0 && file + 1 <= 7)
 			{
@@ -373,56 +337,6 @@ namespace Chess
 					moves.Add(new Move((byte)startPosition, (byte)(startPosition + 9), Piece.None));
 				}
 			}
-		}
-
-		private void AddWhiteKnightMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteKnightAttack(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteBishopMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteBishopAttack(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteRookMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteRookAttack(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteQueenMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteQueenAttack(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteKingMove(List<Move> moves, int startPosition)
-		{
-
-		}
-
-		private void AddWhiteKingAttack(List<Move> moves, int startPosition)
-		{
-
 		}
 	}
 }

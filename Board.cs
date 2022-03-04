@@ -163,6 +163,7 @@ namespace Chess
 			rookMove = default;
 			return false;
 		}
+
 		public List<Move> GetLegalMoves()
 		{
 			List<Move> moves = new List<Move>();
@@ -178,49 +179,253 @@ namespace Chess
 			return moves;
 		}
 
+		 
+
+		private bool PieceIsBlack(Piece piece) => (int)piece >= 7;
+
+		private bool PieceIsWhite(Piece piece) => (int)piece <= 7;
+
 		private void AddLegalMoves(List<Move> moves, int squareIndex)
 		{
-			switch( _state[squareIndex]) // piece of current square on board
+			switch( _state[squareIndex]) 
 			{
 				case Piece.BlackPawn:
 				{
-					AppendBlackPawnMove(moves, squareIndex);
+					AddBlackPawnMove(moves, squareIndex);
+					AddBlackPawnAttack(moves, squareIndex);
+					break;
+				}
+				/*
+				case Piece.BlackKnight:
+				{
+					AddBlackKnightMove(moves, squareIndex);
+					AddBlackKnightAttack(moves, squareIndex);
 					break;
 				}
 				case Piece.BlackBishop:
 				{
-					AppendBlackBishopMove(moves, squareIndex);
+					AddBlackBishopMove(moves, squareIndex);
+					AddBlackBishopAttack(moves, squareIndex);
 					break;
 				}
+				case Piece.BlackRook:
+				{
+					AddBlackRookMove(moves, squareIndex);
+					AddBlackRookAttack(moves, squareIndex);
+					break;
+				}
+				case Piece.BlackQueen:
+				{
+					AddBlackQueenMove(moves, squareIndex);
+					AddBlackQueenAttack(moves, squareIndex);
+					break;
+				}
+				case Piece.BlackKing:
+				{
+					AddBlackKingMove(moves, squareIndex);
+					AddBlackKingAttack(moves, squareIndex);
+					break;
+				}
+				*/
 				case Piece.WhitePawn:
 				{
-					AppendWhitePawnMove(moves, squareIndex);
+					AddWhitePawnMove(moves, squareIndex);
+					AddWhitePawnAttack(moves, squareIndex);
 					break;
 				}
-
+				/*
+				case Piece.WhiteKnight:
+				{
+					AddWhiteKnightMove(moves, squareIndex);
+					AddWhiteKnightAttack(moves, squareIndex);
+					break;
+				}
+				case Piece.WhiteBishop:
+				{
+					AddWhiteBishopMove(moves, squareIndex);
+					AddWhiteBishopAttack(moves, squareIndex);
+					break;
+				}
+				case Piece.WhiteRook:
+				{
+					AddWhiteRookMove(moves, squareIndex);
+					AddWhiteRookAttack(moves, squareIndex);
+					break;
+				}
+				case Piece.WhiteQueen:
+				{
+					AddWhiteQueenMove(moves, squareIndex);
+					AddWhiteQueenAttack(moves, squareIndex);
+					break;
+				}
+				case Piece.WhiteKing:
+				{
+					AddWhiteKingMove(moves, squareIndex);
+					AddWhiteKingAttack(moves, squareIndex);
+					break;
+				}
+				*/
 			}
 		}
-		private void AppendBlackPawnMove(List<Move> moves, int startPosition)
+		private void AddBlackPawnMove(List<Move> moves, int startPosition)
 		{
 			int legalMoveIndex = startPosition - 8;
 			if (legalMoveIndex >= 0 && _state[legalMoveIndex] == Piece.None)
 			{
-				moves.Add(new Move((byte)startPosition, (byte)(legalMoveIndex), Piece.None));
+				moves.Add(new Move((byte)startPosition, (byte)legalMoveIndex, Piece.None));
 			}
 		}
 
-		private void AppendBlackBishopMove(List<Move> moves, int startPosition)
+		private void AddBlackPawnAttack(List<Move> moves, int startPosition)
+		{
+			int rank = startPosition / 8;
+			int file = startPosition % 8;
+
+			if (rank - 1 >= 0 && file - 1 <= 7) // black pawns attack 'down' left 
+			{
+				if (PieceIsWhite(_state[startPosition - 9])) // values based on 8c8 board where each square is marked with an int, 0 being a1
+				{
+					moves.Add(new Move((byte)startPosition, (byte)(startPosition - 9), Piece.None));
+				}
+			}
+			if (rank + 1 >= 0 && file - 1 <= 7) // and 'down' right
+			{
+				if (PieceIsWhite(_state[startPosition - 7]))
+				{
+					moves.Add(new Move((byte)startPosition, (byte)(startPosition - 7), Piece.None));
+				}
+			}
+
+		}
+
+		private void AddBlackKnightMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddBlackKnightAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddBlackBishopMove(List<Move> moves, int startPosition)
 		{
 			
 		}
 
-		private void AppendWhitePawnMove(List<Move> moves, int startPosition)
+		private void AddBlackBishopAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddBlackRookMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddBlackRookAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddBlackQueenMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddBlackQueenAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddBlackKingMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddBlackKingAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhitePawnMove(List<Move> moves, int startPosition)
 		{
 			int legalMoveIndex = startPosition + 8;
 			if (legalMoveIndex < 64 && _state[legalMoveIndex] == Piece.None)
 			{
 				moves.Add(new Move((byte)startPosition, (byte)(legalMoveIndex), Piece.None));
 			}
+		}
+
+		private void AddWhitePawnAttack(List<Move> moves, int startPosition)
+		{
+			int rank = startPosition / 8;
+			int file = startPosition % 8;
+
+			if (rank - 1 >= 0 && file + 1 <= 7)
+			{
+				if (PieceIsBlack(_state[startPosition + 7]))
+				{
+					moves.Add(new Move((byte)startPosition, (byte)(startPosition + 7), Piece.None));
+				}
+			}
+			if (rank + 1 >= 0 && file + 1 <= 7)
+			{
+				if (PieceIsBlack(_state[startPosition + 9]))
+				{
+					moves.Add(new Move((byte)startPosition, (byte)(startPosition + 9), Piece.None));
+				}
+			}
+		}
+
+		private void AddWhiteKnightMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteKnightAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteBishopMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteBishopAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteRookMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteRookAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteQueenMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteQueenAttack(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteKingMove(List<Move> moves, int startPosition)
+		{
+
+		}
+
+		private void AddWhiteKingAttack(List<Move> moves, int startPosition)
+		{
+
 		}
 	}
 }

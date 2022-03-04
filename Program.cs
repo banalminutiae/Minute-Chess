@@ -80,7 +80,7 @@ namespace Chess
 		private static String UciFindBestMove(string[] tokens)
 		{
 			List<Move> legalMoves = _board.GetLegalMoves();
-			Move randomMove = GetRandomMove(legalMoves);
+			Move randomMove = GetRandomMove(legalMoves); // to be replaced with move evaluation
 			return randomMove.ToString();
 		}
 

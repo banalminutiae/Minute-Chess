@@ -179,11 +179,9 @@ namespace Chess
 			return moves;
 		}
 
-		 
-
 		private bool PieceIsBlack(Piece piece) => (int)piece >= 7;
 
-		private bool PieceIsWhite(Piece piece) => (int)piece <= 7;
+		private bool PieceIsWhite(Piece piece) => (int)piece < 7 && (int)piece != 0;
 
 		private void AddLegalMoves(List<Move> moves, int squareIndex)
 		{
@@ -295,7 +293,6 @@ namespace Chess
 					moves.Add(new Move((byte)startPosition, (byte)(startPosition - 7), Piece.None));
 				}
 			}
-
 		}
 
 		private void AddBlackKnightMove(List<Move> moves, int startPosition)

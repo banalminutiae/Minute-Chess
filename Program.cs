@@ -14,7 +14,7 @@ namespace Chess
 			while (running)
 			{
 				string[] tokens = Console.ReadLine().Split();
-				switch (tokens[0])
+				switch(tokens[0])
 				{
 					case "uci":
 					{

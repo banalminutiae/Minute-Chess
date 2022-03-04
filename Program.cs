@@ -7,9 +7,11 @@ namespace Chess
 	class Program
 	{
 		static Board _board = null;
+		
 		static void Main(string[] args)
 		{
-			while(true)
+			bool running = true;
+			while (running)
 			{
 				string[] tokens = Console.ReadLine().Split();
 				switch (tokens[0])
@@ -30,7 +32,16 @@ namespace Chess
 					case "go":
 					{
 						string uciMove = UciFindBestMove(tokens);
-						Console.WriteLine($"best move {uciMove}");
+						Console.WriteLine($"bestmove {uciMove}");
+						break;
+					}
+					case "stop":
+					{
+						break;
+					}
+					case "quit":
+					{
+						running = false;
 						break;
 					}
 					default:
